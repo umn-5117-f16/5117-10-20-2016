@@ -1,0 +1,26 @@
+{
+  "name": "5117-10-20-2016",
+  "version": "1.0.0",
+  "description": "See tutorial <https://docs.mongodb.com/getting-started/shell/import-data/>",
+  "main": "queries.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umn-5117-f16/5117-10-20-2016.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umn-5117-f16/5117-10-20-2016/issues"
+  },
+  "homepage": "https://github.com/umn-5117-f16/5117-10-20-2016#readme",
+  "dependencies": {
+    "async": "^2.1.2",
+    "mongodb": "^2.2.10",
+    "node-stopwatch": "0.0.1",
+    "timer-stopwatch": "^0.2.0"
+  }
+}
