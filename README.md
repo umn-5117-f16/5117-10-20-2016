@@ -33,7 +33,7 @@ insert documents into "messages" collection
 db.messages.insert({'content': 'hello, world'})
 ```
 
-TODO:
+to try:
 * bulk insert
 * custom \_id (see https://docs.mongodb.com/manual/reference/method/ObjectId/)
 
@@ -44,3 +44,6 @@ db.restaurants.find( { "grades.grade": "B" } )
 ```
 
 ## node
+
+see [mongo.js](mongo.js) for db connection management and
+[queries.js](queries.js) for example calls.

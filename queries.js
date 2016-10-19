@@ -5,15 +5,15 @@ var Stopwatch = require('timer-stopwatch');
 
 var stopwatch = new Stopwatch();
 
-
 var startTimer = function(db, callback) {
   stopwatch.start()
   callback(null, db)
 }
 
-// db.messages.createIndex( { username: 1 } )
-// db.messages.dropIndex( { username: 1 } )
+// demonstrate toArray
 var findMessages = function(db, callback) {
+  // db.messages.find({"username":"kjschiroo"})
+
   var filter = {
     'username': 'kjschiroo'
   }
@@ -21,10 +21,11 @@ var findMessages = function(db, callback) {
     assert.equal(null, err);
 
     console.log(docs)
-    callback()
+    callback(null, db)
   });
 }
 
+// demonstrate a nested filter, `limit` and `each`
 var findRestaurants = function(db, callback) {
   var filter = {
     'address.zipcode': '10075'
@@ -37,12 +38,15 @@ var findRestaurants = function(db, callback) {
     if (doc) {
       console.log('%d doc: %s', count, doc.name)
     } else {
-      callback()
+      callback(null, db)
     }
 
   });
 }
 
+// adding an index makes this query faster:
+// db.restaurants.createIndex( { 'address.zipcode': 1 } )
+// db.restaurants.dropIndex( { 'address.zipcode': 1 } )
 var countRestaurants = function(db, callback) {
   var filter = {
     'address.zipcode': '10075'
@@ -52,7 +56,7 @@ var countRestaurants = function(db, callback) {
     assert.equal(null, err);
     console.log('number of matching restaurants: %d', count)
 
-    callback()
+    callback(null, db)
   });
 }
 
@@ -80,20 +84,18 @@ var groupRestaurants = function(db, callback) {
     assert.equal(null, err);
     console.log('result: %s', JSON.stringify(result, null, 2))
 
-    callback()
+    callback(null, db)
   });
 }
-
-
 
 async.waterfall([
   mongo.connect,
   startTimer,
-  
-  findMessages
-  // findRestaurants
-  // countRestaurants
-  // groupRestaurants
+
+  findMessages,
+  // findRestaurants,
+  // countRestaurants,
+  // groupRestaurants,
 ], function (err, result) {
   console.log('done! took %d ms', stopwatch.ms)
   process.exit()
